@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/button'
 import { Mood } from '@/types'
 
 export default function FeelingList() {
@@ -16,6 +17,20 @@ export default function FeelingList() {
     const data = await response.json()
     setMoods(data.reverse())
     setLoading(false)
+  }
+
+  async function deleteMood(moodId: string) {
+    const response = await fetch('/api/moods', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ moodId }),
+    })
+
+    if (response.ok) {
+      fetchMoods()
+    }
   }
 
   useEffect(() => {
@@ -40,13 +55,16 @@ export default function FeelingList() {
                 <Skeleton className="h-20 w-full" />
               </div>
             )}
-            {moods.map((response) => (
-              <Card key={response.id} className="mb-4 last:mb-0 border-gray-200">
-                <CardContent className="p-4">
-                  <p className="text-gray-700 mb-2">{response.mood}</p>
-                  <p className="text-sm text-gray-500">
-                    {new Date(response.timestamp).toLocaleString()}
-                  </p>
+            {moods.map((m) => (
+              <Card key={m.id} className="mb-4 last:mb-0 border-gray-200">
+                <CardContent className="p-4 flex justify-between items-center">
+                  <div>
+                    <p className="text-gray-700 mb-2">{m.mood}</p>
+                    <p className="text-sm text-gray-500">
+                      {new Date(m.timestamp).toLocaleString()}
+                    </p>
+                  </div>
+                  <Button onClick={() => deleteMood(m.id)}>Delete</Button>
                 </CardContent>
               </Card>
             ))}
