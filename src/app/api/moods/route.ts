@@ -1,13 +1,13 @@
 export const dynamic = 'force-dynamic'
 
-import { neon } from '@neondatabase/serverless'
+import { neon, NeonQueryFunction } from '@neondatabase/serverless'
 import { encryptData, decryptData } from '@/lib/encrypt'
 import { currentUser, User } from '@clerk/nextjs/server'
 
 async function initEnv(): Promise<{
   errorResponse: Response | null
   user: User | null
-  sql: Function | null
+  sql: NeonQueryFunction<false, false> | null
 }> {
   if (!process.env.DATABASE_URL || !process.env.ENCRYPTION_KEY) {
     return {
@@ -33,7 +33,7 @@ async function initEnv(): Promise<{
 export async function GET() {
   const { errorResponse, user, sql } = await initEnv()
   if (errorResponse || !user || !sql) {
-    return errorResponse
+    return errorResponse ?? new Response('Internal Server Error', { status: 500 })
   }
 
   const data = await sql`SELECT * FROM moods where user_id = ${user.id}`
@@ -48,7 +48,7 @@ export async function GET() {
 export async function POST(request: Request) {
   const { errorResponse, user, sql } = await initEnv()
   if (errorResponse || !user || !sql) {
-    return errorResponse
+    return errorResponse ?? new Response('Internal Server Error', { status: 500 })
   }
 
   const { mood } = await request.json()
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   const { errorResponse, user, sql } = await initEnv()
   if (errorResponse || !user || !sql) {
-    return errorResponse
+    return errorResponse ?? new Response('Internal Server Error', { status: 500 })
   }
 
   const { moodId } = await request.json()
