@@ -4,7 +4,7 @@ import { neon } from '@neondatabase/serverless'
 import { encryptData, decryptData } from '@/lib/encrypt'
 import { currentUser } from '@clerk/nextjs/server'
 
-export async function GET(request: Request) {
+export async function GET() {
   if (!process.env.DATABASE_URL || !process.env.ENCRYPTION_KEY) {
     return new Response('Missing required env variable(s)', { status: 500 })
   }
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 
   const sql = neon(process.env.DATABASE_URL)
   const data = await sql`SELECT * FROM moods where user_id = ${user.id}`
-  const decryptedData = data.map((row: any) => ({
+  const decryptedData = data.map((row: Record<string, string>) => ({
     ...row,
     mood: decryptData(row.mood, process.env.ENCRYPTION_KEY || '')
   }))

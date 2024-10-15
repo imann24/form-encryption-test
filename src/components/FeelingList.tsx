@@ -5,15 +5,6 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Mood } from '@/types'
 
-// This would typically come from your data store or API
-const moodResponses = [
-  { id: 1, mood: "I'm feeling excited about my new project!", timestamp: "2023-06-15T10:30:00Z" },
-  { id: 2, mood: "Feeling a bit stressed with the upcoming deadline.", timestamp: "2023-06-14T14:45:00Z" },
-  { id: 3, mood: "Today was a great day! I accomplished all my tasks.", timestamp: "2023-06-13T18:20:00Z" },
-  { id: 4, mood: "Feeling inspired after attending a motivational seminar.", timestamp: "2023-06-12T09:15:00Z" },
-  { id: 5, mood: "A little tired, but overall content with how the week is going.", timestamp: "2023-06-11T21:00:00Z" },
-]
-
 export default function FeelingList() {
   const [ moods, setMoods ] = useState<Mood[]>([])
 
