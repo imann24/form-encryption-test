@@ -14,7 +14,7 @@ export default function FeelingList() {
     setLoading(true)
     const response = await fetch('/api/moods')
     const data = await response.json()
-    setMoods(data)
+    setMoods(data.reverse())
     setLoading(false)
   }
 
