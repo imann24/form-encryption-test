@@ -73,7 +73,6 @@ const addToRemoveQueue = (toastId: string) => {
 }
 
 export const reducer = (state: State, action: Action): State => {
-  console.log('reducer', action)
   switch (action.type) {
     case ActionTypes.ADD_TOAST:
       return {
@@ -133,7 +132,6 @@ const listeners: Array<(state: State) => void> = []
 let memoryState: State = { toasts: [] }
 
 function dispatch(action: Action) {
-  console.log('dispatch', action)
   memoryState = reducer(memoryState, action)
   listeners.forEach((listener) => {
     listener(memoryState)
