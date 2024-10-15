@@ -1,13 +1,13 @@
 import React from 'react'
-import FeelingForm from '@/components/FeelingForm'
+import FeelingList from '@/components/FeelingList'
 import NavBar from '@/components/NavBar'
 
-export default function Home() {
+export default function List() {
   return (
     <div>
       <main>
         <NavBar />
-        <FeelingForm />
+        <FeelingList />
       </main>
     </div>
   );
