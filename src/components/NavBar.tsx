@@ -15,7 +15,7 @@ export default function NavBar() {
 
   return (
     <nav className="fixed flex space-x-10 top-4 left-4">
-      <Link href="/" className={`${linkClass('/')}`}>Post</Link>
+      <Link href="/" className={`${linkClass('/')}`}>Log</Link>
       <Link href="/saved" className={`${linkClass('/saved')}`}>View</Link>
     </nav>
   )

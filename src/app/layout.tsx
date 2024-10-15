@@ -7,6 +7,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 const geistSans = localFont({
@@ -46,6 +47,7 @@ export default function RootLayout({
               <UserButton/>
             </div>
             {children}
+            <Toaster />
           </SignedIn>
         </body>
       </html>

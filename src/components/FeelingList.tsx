@@ -55,7 +55,7 @@ export default function FeelingList() {
                 <Skeleton className="h-20 w-full" />
               </div>
             )}
-            {moods.map((m) => (
+            {!loading &&moods.map((m) => (
               <Card key={m.id} className="mb-4 last:mb-0 border-gray-200">
                 <CardContent className="p-4 flex justify-between items-center">
                   <div>

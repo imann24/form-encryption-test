@@ -1,12 +1,15 @@
 'use client'
 
 import React, { ChangeEvent, useState } from 'react'
+import Link from 'next/link'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import { useToast } from '@/hooks/use-toast'
 
 export default function FeelingForm () {
-  const [mood, setMood] = useState('')
+  const [ mood, setMood ] = useState('')
+  const { toast } = useToast()
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault()
@@ -17,6 +20,17 @@ export default function FeelingForm () {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
+    })
+    toast({
+      title: 'Mood Saved',
+      description: (
+        <Link
+          href="/saved"
+          className="text-blue-500 hover:text-blue-600"
+        >
+          View All Your Moods
+        </Link>
+      )
     })
     setMood('')
   }
