@@ -8,6 +8,11 @@ frontend:
   phases:
     build:
       commands:
+        # Amplify stores our environment variables in the cloud but doesn't automatically configure the .env file:
+        - echo DATABASE_URL=$DATABASE_URL >> .env
+        - echo ENCRYPTION_KEY=$ENCRYPTION_KEY >> .env
+        - echo NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY >> .env
+        - echo CLERK_SECRET_KEY=$CLERK_SECRET_KEY >> .env
         - yarn build
   artifacts:
     baseDirectory: .next
