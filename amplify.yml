@@ -4,7 +4,7 @@ backend:
     build:
       commands:
         - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
-        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+        - npx @aws-amplify/backend-cli pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     build:
