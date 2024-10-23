@@ -23,7 +23,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Test Form Encrpytion",
-  description: "Simple form and resposne display to test server-side encryption",
+  description: "Simple form and response display to test server-side encryption",
 };
 
 export default function RootLayout({
